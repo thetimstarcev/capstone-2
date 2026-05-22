@@ -1,4 +1,9 @@
 package com.pluralsight;
 
-public class MenuItem {
+public abstract class MenuItem {
+    private String name;
+
+    public double getPrice() {
+        return 0;
+    }
 }

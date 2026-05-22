@@ -1,4 +1,5 @@
 package com.pluralsight;
 
-public class Chips {
+public class Chips extends MenuItem {
+    private String name;
 }
