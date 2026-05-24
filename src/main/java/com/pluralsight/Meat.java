@@ -1,5 +1,8 @@
 package com.pluralsight;
 
+import com.pluralsight.enums.MeatType;
+import com.pluralsight.enums.Size;
+
 public class Meat extends Ingredients {
     private MeatType meatType;
     private boolean extraMeat;
@@ -17,6 +20,7 @@ public class Meat extends Ingredients {
         return extraMeat;
     }
 
+    @Override
     public double getPrice(Size size) {
         double price;
         switch (size) {

@@ -1,4 +1,4 @@
-package com.pluralsight;
+package com.pluralsight.enums;
 
 public enum Size {
     SMALL, // 4" sandwich / small drink
