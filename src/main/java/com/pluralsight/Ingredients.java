@@ -1,4 +1,10 @@
 package com.pluralsight;
 
-public class Ingredients {
+public abstract class Ingredients {
+    private String name;
+
+    public double getPrice () {
+        return 0;
+    }
+
 }

@@ -1,12 +1,12 @@
 package com.pluralsight;
 
 public class Drink extends MenuItem {
-    private DrinkSize size;
+    private Size size;
 
     public double getPrice() {
-        if (size == DrinkSize.SMALL) {
+        if (size == Size.SMALL) {
             return 2.0;
-        } else if (size == DrinkSize.MEDIUM) {
+        } else if (size == Size.MEDIUM) {
             return 2.5;
         } else return 3.0;
         }
