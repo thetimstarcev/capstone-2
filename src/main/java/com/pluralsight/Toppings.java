@@ -3,14 +3,14 @@ import com.pluralsight.enums.Size;
 import com.pluralsight.enums.ToppingsType;
 
 public class Toppings extends Ingredients {
-    private ToppingsType topping;
+    private ToppingsType toppingType;
 
     public Toppings(ToppingsType topping) {
-        this.topping = topping;
+        this.toppingType = topping;
     }
 
     public ToppingsType getTopping() {
-        return topping;
+        return toppingType;
     }
 
     @Override
