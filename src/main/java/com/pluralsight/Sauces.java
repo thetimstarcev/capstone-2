@@ -15,6 +15,6 @@ public class Sauces extends Ingredients{
 
     @Override
     public double getPrice (Size size) {
-        return 0; // Regular toppings are included at no extra cost
+        return 0; // Regular sauces are included at no extra cost
     }
 }
