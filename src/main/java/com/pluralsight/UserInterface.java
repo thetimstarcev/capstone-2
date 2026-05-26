@@ -2,17 +2,19 @@ package com.pluralsight;
 
 import com.pluralsight.enums.*;
 
+import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class UserInterface {
-    static Scanner scanner = new Scanner(System.in);
+    private static Scanner scanner = new Scanner(System.in);
+    private Order order;
+    int orderCounter = 1;
 
     public void homeScreen() {
         String prompt = """
                 Welcome to DELI-cious!
                 1) New Order
                 0) Exit
-                
                 """;
 
 
@@ -34,12 +36,15 @@ public class UserInterface {
     }
 
     private void showOrderScreen() {
+        LocalDateTime orderTime = LocalDateTime.now();
+        String orderNumber = "A" + orderCounter;
+        orderCounter += 1;
+        order = new Order(orderNumber,orderTime);
         String prompt = """
                 
                 =========================================
                          Welcome to DELI-cious!
                 =========================================
-                Your order is empty. Let's build it!
                 
                 1) Add Sandwich
                 2) Add Drink
@@ -58,7 +63,7 @@ public class UserInterface {
                 case "2" -> addDrink();
                 case "3" -> addChips();
                 case "4" -> checkout();
-                case "0" -> running = false;
+                case "0" -> cancelOrder();
                 default -> System.out.println("Invalid input. Please try again.");
             }
         } while (running);
@@ -253,72 +258,76 @@ public class UserInterface {
                 }
                 sandwich.addIngredients(new Sides(side));
             } while (running);
-        }
+        } order.addItem(sandwich);
     }
 
     private void addDrink() {
-        System.out.println("Would you like to add drink to your order? (yes/no)\n");
-        String userInput = scanner.nextLine();
-        boolean running;
-        if (userInput.equalsIgnoreCase("yes")) {
-            running = true;
-            do {
-                System.out.println("""
-                        Please select your drink size:
-                        1) Small
-                        2) Medium
-                        3) Large
-                        """);
-                String userSelection = scanner.nextLine();
-                Size size = null;
-                switch (userSelection) {
-                    case "1" -> size = Size.SMALL;
-                    case "2" -> size = Size.MEDIUM;
-                    case "3" -> size = Size.LARGE;
-                    default -> System.out.println("Invalid input. Please try again.");
-                }
-                Drink drink = new Drink(size);
-                System.out.println("Would you like to add another drink? (yes/no)\n");
-                String userAnswer = scanner.nextLine();
-                if (userAnswer.equalsIgnoreCase("no")) {
-                    running = false;
-                }
-            } while (running);
-        }
+        boolean running = true;
+        do {
+            System.out.println("""
+                    Please select your drink size:
+                    1) Small
+                    2) Medium
+                    3) Large
+                    """);
+            String userSelection = scanner.nextLine();
+            Size size = null;
+            switch (userSelection) {
+                case "1" -> size = Size.SMALL;
+                case "2" -> size = Size.MEDIUM;
+                case "3" -> size = Size.LARGE;
+                default -> System.out.println("Invalid input. Please try again.");
+            }
+            Drink drink = new Drink(size);
+            order.addItem(drink);
+            System.out.println("Would you like to add another drink? (yes/no)\n");
+            String userAnswer = scanner.nextLine();
+            if (userAnswer.equalsIgnoreCase("no")) {
+                running = false;
+            }
+        } while (running);
     }
 
     private void addChips() {
-        System.out.println("Would you like to add chips to your order? (yes/no)\n");
-        String userInput = scanner.nextLine();
-        if (userInput.equalsIgnoreCase("yes")) {
-            boolean running = true;
-            do {
-                System.out.println("""
-                        Please select your chips:
-                        1) Doritos
-                        2) Lays
-                        3) Cheetos
-                        4) Pringles
-                        """);
-                String userselection = scanner.nextLine();
-                String chipsSelection = null;
-                switch (userselection) {
-                    case "1" -> chipsSelection = "Doritos";
-                    case "2" -> chipsSelection = "Lays";
-                    case "3" -> chipsSelection = "Cheetos";
-                    case "4" -> chipsSelection = "Pringles";
-                }
-                Chips chips = new Chips(chipsSelection);
-                System.out.println("Would you like to add another bag of chips? (yes/no)\n");
-                String userAnswer = scanner.nextLine();
-                if (userAnswer.equalsIgnoreCase("no")) {
-                    running = false;
-                }
-            } while (running);
-        }
+        boolean running = true;
+        do {
+            System.out.println("""
+                    Please select your chips:
+                    1) Doritos
+                    2) Lays
+                    3) Cheetos
+                    4) Pringles
+                    """);
+            String userSelection = scanner.nextLine();
+            String chipsSelection = null;
+            switch (userSelection) {
+                case "1" -> chipsSelection = "Doritos";
+                case "2" -> chipsSelection = "Lays";
+                case "3" -> chipsSelection = "Cheetos";
+                case "4" -> chipsSelection = "Pringles";
+            }
+            Chips chips = new Chips(chipsSelection);
+            order.addItem(chips);
+            System.out.println("Would you like to add another bag of chips? (yes/no)\n");
+            String userAnswer = scanner.nextLine();
+            if (userAnswer.equalsIgnoreCase("no")) {
+                running = false;
+            }
+        } while (running);
+    }
+
+    private void cancelOrder() {
+        order = null;
+        orderCounter -= 1;
+        homeScreen();
     }
 
     private void checkout() {
+        if (order.calculateTotal() == 0.00) {
+            System.out.println("Oops! Your order is empty. Returning to home screen...");
+            cancelOrder();
+        } //TODO else
+
     }
 
 
