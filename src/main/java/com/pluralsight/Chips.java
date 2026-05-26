@@ -1,9 +1,12 @@
 package com.pluralsight;
 
-import com.pluralsight.enums.Size;
 
 public class Chips extends MenuItem {
     private String name;
+
+    public Chips(String name) {
+        this.name = name;
+    }
 
     @Override
     public double getPrice() {
@@ -12,6 +15,6 @@ public class Chips extends MenuItem {
 
     @Override
     public String getName() {
-        return "";
+        return this.name + " Chips";
     }
 }
