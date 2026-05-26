@@ -1,15 +1,16 @@
 package com.pluralsight;
 
+import com.pluralsight.enums.SidesType;
 import com.pluralsight.enums.Size;
 
 public class Sides extends Ingredients{
-    private String sideType;
+    private SidesType sideType;
 
-    public Sides(String sideType) {
+    public Sides(SidesType sideType) {
         this.sideType = sideType;
     }
 
-    public String getSideType() {
+    public SidesType getSideType() {
         return sideType;
     }
 

@@ -165,24 +165,24 @@ public class UserInterface {
         } while (running);
 
 
-        running = true;
         System.out.println("Would you like to add any other ingredients to your sandwich? (yes/no)\n");
         String userInputIngredients = scanner.nextLine();
         if (userInputIngredients.equalsIgnoreCase("yes")) {
+            running = true;
             do {
                 System.out.println("""
-                    Please select your toppings:
-                    1) Lettuce
-                    2) Peppers
-                    3) Onions
-                    4) Tomatoes
-                    5) Jalapeños
-                    6) Cucumbers
-                    7) Pickles
-                    8) Guacamole
-                    9) Mushrooms
-                    0) Done adding ingredients
-                    """);
+                        Please select your toppings:
+                        1) Lettuce
+                        2) Peppers
+                        3) Onions
+                        4) Tomatoes
+                        5) Jalapeños
+                        6) Cucumbers
+                        7) Pickles
+                        8) Guacamole
+                        9) Mushrooms
+                        0) Done adding ingredients
+                        """);
                 String userSelection = scanner.nextLine();
                 ToppingsType topping = null;
                 switch (userSelection) {
@@ -201,10 +201,10 @@ public class UserInterface {
             } while (running);
         }
 
-        running = true;
         System.out.println("Would you like to add some sauce? (yes/no)\n");
         String userInputSauce = scanner.nextLine();
         if (userInputSauce.equalsIgnoreCase("yes")) {
+            running = true;
             do {
                 System.out.println("""   
                         Select your sauce:
@@ -229,6 +229,29 @@ public class UserInterface {
                     default -> System.out.println("Invalid input. Please try again.");
                 }
                 sandwich.addIngredients(new Sauces(sauce));
+            } while (running);
+        }
+
+        System.out.println("Would you like to add sides to your order? (yes/no)\n");
+        String userInput = scanner.nextLine();
+        if (userInput.equalsIgnoreCase("yes")) {
+            running = true;
+            do {
+                System.out.println("""
+                        Please select your side:
+                        1) Au jus
+                        2) Sauce
+                        0) Done adding sides
+                        """);
+                String userSelection = scanner.nextLine();
+                SidesType side = null;
+                switch (userSelection) {
+                    case "1" -> side = SidesType.AU_JUS;
+                    case "2" -> side = SidesType.SAUCE;
+                    case "0" -> running = false;
+                    default -> System.out.println("Invalid input. Please try again.");
+                }
+                sandwich.addIngredients(new Sides(side));
             } while (running);
         }
     }
