@@ -284,12 +284,38 @@ public class UserInterface {
                     running = false;
                 }
             } while (running);
-
-
         }
     }
 
     private void addChips() {
+        System.out.println("Would you like to add chips to your order? (yes/no)\n");
+        String userInput = scanner.nextLine();
+        if (userInput.equalsIgnoreCase("yes")) {
+            boolean running = true;
+            do {
+                System.out.println("""
+                        Please select your chips:
+                        1) Doritos
+                        2) Lays
+                        3) Cheetos
+                        4) Pringles
+                        """);
+                String userselection = scanner.nextLine();
+                String chipsSelection = null;
+                switch (userselection) {
+                    case "1" -> chipsSelection = "Doritos";
+                    case "2" -> chipsSelection = "Lays";
+                    case "3" -> chipsSelection = "Cheetos";
+                    case "4" -> chipsSelection = "Pringles";
+                }
+                Chips chips = new Chips(chipsSelection);
+                System.out.println("Would you like to add another bag of chips? (yes/no)\n");
+                String userAnswer = scanner.nextLine();
+                if (userAnswer.equalsIgnoreCase("no")) {
+                    running = false;
+                }
+            } while (running);
+        }
     }
 
     private void checkout() {
