@@ -1,9 +1,7 @@
 package com.pluralsight;
+import com.pluralsight.enums.Size;
 
 public abstract class MenuItem {
-    private String name;
-
-    public double getPrice() {
-        return 0;
-    }
+    public abstract double getPrice();
+    public abstract String getName();
 }

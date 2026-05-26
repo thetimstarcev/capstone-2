@@ -1,5 +1,4 @@
 package com.pluralsight;
-
 import com.pluralsight.enums.Size;
 
 public abstract class Ingredients {
