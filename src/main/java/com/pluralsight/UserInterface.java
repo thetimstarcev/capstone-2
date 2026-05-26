@@ -257,6 +257,36 @@ public class UserInterface {
     }
 
     private void addDrink() {
+        System.out.println("Would you like to add drink to your order? (yes/no)\n");
+        String userInput = scanner.nextLine();
+        boolean running;
+        if (userInput.equalsIgnoreCase("yes")) {
+            running = true;
+            do {
+                System.out.println("""
+                        Please select your drink size:
+                        1) Small
+                        2) Medium
+                        3) Large
+                        """);
+                String userSelection = scanner.nextLine();
+                Size size = null;
+                switch (userSelection) {
+                    case "1" -> size = Size.SMALL;
+                    case "2" -> size = Size.MEDIUM;
+                    case "3" -> size = Size.LARGE;
+                    default -> System.out.println("Invalid input. Please try again.");
+                }
+                Drink drink = new Drink(size);
+                System.out.println("Would you like to add another drink? (yes/no)\n");
+                String userAnswer = scanner.nextLine();
+                if (userAnswer.equalsIgnoreCase("no")) {
+                    running = false;
+                }
+            } while (running);
+
+
+        }
     }
 
     private void addChips() {
