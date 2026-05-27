@@ -67,9 +67,9 @@ public class UserInterface {
         System.out.println("""
                          What size would you like your sandwich?
                         =========================================
-                        (1)  4"  - Small                  ($5.50)
-                        (2)  8"  - Medium                 ($7.00)
-                        (3)  12" - Large                  ($8.50)
+                        ($5.50)   4"  - Small                 (1)
+                        ($7.00)   8"  - Medium                (2)
+                        ($8.50)   12" - Large                 (3)
                         =========================================
                         \n""");
 
@@ -83,14 +83,23 @@ public class UserInterface {
 
         }
 
-        System.out.println("What type of bread you would like to have?\n");
+        System.out.println("""
+                            What type of bread you would like?
+                        =========================================
+                        🍞 White                              (1)
+                        🌾 Wheat                              (2)
+                        🫓 Rye                                (3)
+                        🌯 Wrap                               (4)
+                        =========================================
+                        """);
+
         String userInputBread = scanner.nextLine();
         BreadType bread = null;
         switch (userInputBread) {
-            case "White", "white", "WHITE" -> bread = BreadType.WHITE;
-            case "Wheat", "wheat", "WHEAT" -> bread = BreadType.WHEAT;
-            case "Rye", "rye", "RYE" -> bread = BreadType.RYE;
-            case "Wrap", "wrap", "WRAP" -> bread = BreadType.WRAP;
+            case "1" -> bread = BreadType.WHITE;
+            case "2" -> bread = BreadType.WHEAT;
+            case "3" -> bread = BreadType.RYE;
+            case "4" -> bread = BreadType.WRAP;
             default -> System.out.println("Invalid input. Please try again.");
 
         }
