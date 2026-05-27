@@ -1,11 +1,15 @@
 package com.pluralsight;
 import com.pluralsight.enums.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
     private Scanner scanner = new Scanner(System.in);
+    LocalDateTime orderTime;
     private Order order;
+    private ReceiptWriter writer = new ReceiptWriter();
     private int orderCounter = 1;
 
     public void homeScreen() {
@@ -21,18 +25,21 @@ public class UserInterface {
             String userInput = scanner.nextLine();
 
             switch (userInput) {
-                case "1" -> showOrderScreen ();
-                case "0" -> {running = false; System.out.println("Have a great day and see you soon!");}
+                case "1" -> showOrderScreen();
+                case "0" -> {
+                    running = false;
+                    System.out.println("Have a great day and see you soon!");
+                }
                 default -> System.out.println("Invalid input. Please try again.");
             }
         } while (running);
     }
 
     private void showOrderScreen() {
-        LocalDateTime orderTime = LocalDateTime.now();
+        orderTime = LocalDateTime.now();
         String orderNumber = "A" + orderCounter;
-        orderCounter ++;
-        order = new Order(orderNumber,orderTime);
+        orderCounter++;
+        order = new Order(orderNumber, orderTime);
         String prompt = """
                 
                 =========================================
@@ -105,13 +112,13 @@ public class UserInterface {
 
     private void buildCustomSandwich() {
         System.out.println("""
-                         What size would you like your sandwich?
-                        =========================================
-                        ($5.50)   4"  - Small                 (1)
-                        ($7.00)   8"  - Medium                (2)
-                        ($8.50)   12" - Large                 (3)
-                        =========================================
-                        \n""");
+                 What size would you like your sandwich?
+                =========================================
+                ($5.50)   4"  - Small                 (1)
+                ($7.00)   8"  - Medium                (2)
+                ($8.50)   12" - Large                 (3)
+                =========================================
+                \n""");
 
         String userInputSize = scanner.nextLine();
         Size size = null;
@@ -123,14 +130,14 @@ public class UserInterface {
         }
 
         System.out.println("""
-                            What type of bread you would like?
-                        =========================================
-                        🍞 White                              (1)
-                        🌾 Wheat                              (2)
-                        🫓 Rye                                (3)
-                        🌯 Wrap                               (4)
-                        =========================================
-                        """);
+                    What type of bread you would like?
+                =========================================
+                🍞 White                              (1)
+                🌾 Wheat                              (2)
+                🫓 Rye                                (3)
+                🌯 Wrap                               (4)
+                =========================================
+                """);
 
         String userInputBread = scanner.nextLine();
         BreadType bread = null;
@@ -152,14 +159,14 @@ public class UserInterface {
         String userInputMeat = scanner.nextLine();
         if (userInputMeat.equalsIgnoreCase("yes")) {
             System.out.println("""
-                Select your meat:
-                1) Steak
-                2) Ham
-                3) Salami
-                4) Roast Beef
-                5) Chicken
-                6) Bacon
-                """);
+                    Select your meat:
+                    1) Steak
+                    2) Ham
+                    3) Salami
+                    4) Roast Beef
+                    5) Chicken
+                    6) Bacon
+                    """);
             String userSelection = scanner.nextLine();
             MeatType meat = null;
             switch (userSelection) {
@@ -171,22 +178,22 @@ public class UserInterface {
                 case "6" -> meat = MeatType.BACON;
                 default -> System.out.println("Invalid input. Please try again.");
             }
-                System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
-                String userAnswer = scanner.nextLine();
-                boolean extra = userAnswer.equalsIgnoreCase("yes");
-                sandwich.addMeat(new Meat(meat, extra));
+            System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
+            String userAnswer = scanner.nextLine();
+            boolean extra = userAnswer.equalsIgnoreCase("yes");
+            sandwich.addMeat(new Meat(meat, extra));
         }
 
         System.out.println("Would you like to add cheese to your sandwich? (yes/no)\n");
         String userInputCheese = scanner.nextLine();
         if (userInputCheese.equalsIgnoreCase("yes")) {
             System.out.println("""
-                Select your cheese:
-                1) American
-                2) Provolone
-                3) Cheddar
-                4) Swiss
-                """);
+                    Select your cheese:
+                    1) American
+                    2) Provolone
+                    3) Cheddar
+                    4) Swiss
+                    """);
             String userSelection = scanner.nextLine();
             CheeseType cheese = null;
             switch (userSelection) {
@@ -297,9 +304,9 @@ public class UserInterface {
                     sandwich.addIngredients(new Sides(side));
                 }
             } while (running);
-        } order.addItem(sandwich);
+        }
+        order.addItem(sandwich);
         System.out.println("Sandwich has been added to your order!");
-        showOrderScreen();
     }
 
     private void addDrink() {
@@ -330,7 +337,6 @@ public class UserInterface {
             }
         } while (running);
         System.out.println("Drink has been added to your order!");
-        showOrderScreen();
     }
 
     private void addChips() {
@@ -363,22 +369,34 @@ public class UserInterface {
             }
         } while (running);
         System.out.println("Chips has been added to your order!");
-        showOrderScreen();
     }
 
     private void cancelOrder() {
         order = null;
-        orderCounter --;
+        orderCounter--;
         homeScreen();
     }
 
     private void checkout() {
         if (order.calculateTotal() == 0.00) {
             System.out.println("Oops! Your order is empty. Returning to home screen...");
+            System.out.println(order.getItems());
             cancelOrder();
-        } //TODO else
-
+        } else {
+            System.out.println(writer.getOrder(order));
+            System.out.println("""              
+                    -----------------------------------------
+                              Is your order correct?
+                    -----------------------------------------
+                    ✅ Confirm                            (1)
+                    ❌ Cancel                             (2)
+                    -----------------------------------------
+                    """);
+            String userInput = scanner.nextLine();
+            if (userInput.equalsIgnoreCase("1")) {
+                System.out.println("Your order has been confirmed! Thank you for choosing DELIcious!");
+                writer.writeReceipt(order);
+            } else cancelOrder();
+        }
     }
-
-
 }

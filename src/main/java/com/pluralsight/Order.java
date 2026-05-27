@@ -18,6 +18,10 @@ public class Order {
         return items;
     }
 
+    public String getOrderNumber() {
+        return orderNumber;
+    }
+
     public LocalDateTime getOrderTime() {
         return orderTime;
     }
