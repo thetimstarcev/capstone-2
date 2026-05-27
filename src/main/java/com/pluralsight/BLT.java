@@ -10,4 +10,7 @@ public class BLT extends Sandwich {
         addIngredients(new Toppings(ToppingsType.TOMATOES));
         addIngredients(new Sauces(SaucesType.RANCH));
     }
+    public String getName(){
+        return "BLT Signature Sandwich \n" + this.getSize() + " " + this.getType() + " Toasted";
+    }
 }
