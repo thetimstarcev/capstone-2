@@ -15,7 +15,6 @@ public class UserInterface {
                 0) Exit
                 """;
 
-
         boolean running = true;
         do {
             System.out.println(prompt);
@@ -149,82 +148,64 @@ public class UserInterface {
 
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
-        boolean running;
         System.out.println("Would you like to add meat to your sandwich? (yes/no)\n");
         String userInputMeat = scanner.nextLine();
         if (userInputMeat.equalsIgnoreCase("yes")) {
-            running = true;
-            do {
-                System.out.println("""
-                    Select your meat:
-                    1) Steak
-                    2) Ham
-                    3) Salami
-                    4) Roast Beef
-                    5) Chicken
-                    6) Bacon
-                    0) Done adding meat
-                    """);
-                String userSelection = scanner.nextLine();
-                MeatType meat = null;
-                switch (userSelection) {
-                    case "1" -> meat = MeatType.STEAK;
-                    case "2" -> meat = MeatType.HAM;
-                    case "3" -> meat = MeatType.SALAMI;
-                    case "4" -> meat = MeatType.ROAST_BEEF;
-                    case "5" -> meat = MeatType.CHICKEN;
-                    case "6" -> meat = MeatType.BACON;
-                    case "0" -> running = false;
-                    default -> System.out.println("Invalid input. Please try again.");
-                }
-                if (meat != null) {
-                    System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
-                    String userAnswer = scanner.nextLine();
-                    boolean extra = userAnswer.equalsIgnoreCase("yes");
-                    sandwich.addMeat(new Meat(meat, extra));
-                } else running = false;
-            } while (running);
+            System.out.println("""
+                Select your meat:
+                1) Steak
+                2) Ham
+                3) Salami
+                4) Roast Beef
+                5) Chicken
+                6) Bacon
+                """);
+            String userSelection = scanner.nextLine();
+            MeatType meat = null;
+            switch (userSelection) {
+                case "1" -> meat = MeatType.STEAK;
+                case "2" -> meat = MeatType.HAM;
+                case "3" -> meat = MeatType.SALAMI;
+                case "4" -> meat = MeatType.ROAST_BEEF;
+                case "5" -> meat = MeatType.CHICKEN;
+                case "6" -> meat = MeatType.BACON;
+                default -> System.out.println("Invalid input. Please try again.");
+            }
+                System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
+                String userAnswer = scanner.nextLine();
+                boolean extra = userAnswer.equalsIgnoreCase("yes");
+                sandwich.addMeat(new Meat(meat, extra));
         }
 
-
-            System.out.println("Would you like to add cheese to your sandwich? (yes/no)\n");
-            String userInputCheese = scanner.nextLine();
-            if (userInputCheese.equalsIgnoreCase("yes")) {
-                running = true;
-                do {
-                    System.out.println("""
-                        Select your cheese:
-                        1) American
-                        2) Provolone
-                        3) Cheddar
-                        4) Swiss
-                        0) Done adding cheese
-                        """);
-                    String userSelection = scanner.nextLine();
-                    CheeseType cheese = null;
-                    switch (userSelection) {
-                        case "1" -> cheese = CheeseType.AMERICAN;
-                        case "2" -> cheese = CheeseType.PROVOLONE;
-                        case "3" -> cheese = CheeseType.CHEDDAR;
-                        case "4" -> cheese = CheeseType.SWISS;
-                        case "0" -> running = false;
-                        default -> System.out.println("Invalid input. Please try again.");
-                    }
-                    System.out.println("Would you like to add extra cheese to your sandwich? (yes/no)\n");
-                    String userAnswer = scanner.nextLine();
-                    boolean extra = userAnswer.equalsIgnoreCase("yes");
-                    if (cheese != null) {
-                        sandwich.addCheese(new Cheese(cheese, extra));
-                    } else running = false;
-                } while (running);
+        System.out.println("Would you like to add cheese to your sandwich? (yes/no)\n");
+        String userInputCheese = scanner.nextLine();
+        if (userInputCheese.equalsIgnoreCase("yes")) {
+            System.out.println("""
+                Select your cheese:
+                1) American
+                2) Provolone
+                3) Cheddar
+                4) Swiss
+                """);
+            String userSelection = scanner.nextLine();
+            CheeseType cheese = null;
+            switch (userSelection) {
+                case "1" -> cheese = CheeseType.AMERICAN;
+                case "2" -> cheese = CheeseType.PROVOLONE;
+                case "3" -> cheese = CheeseType.CHEDDAR;
+                case "4" -> cheese = CheeseType.SWISS;
+                default -> System.out.println("Invalid input. Please try again.");
             }
-
-
+            System.out.println("Would you like to add extra cheese to your sandwich? (yes/no)\n");
+            String userAnswer = scanner.nextLine();
+            boolean extra = userAnswer.equalsIgnoreCase("yes");
+            sandwich.addCheese(new Cheese(cheese, extra));
+        }
 
         System.out.println("Would you like to add any other ingredients to your sandwich? (yes/no)\n");
         String userInputIngredients = scanner.nextLine();
         if (userInputIngredients.equalsIgnoreCase("yes")) {
-            running = true;
+            boolean running = true;
             do {
                 System.out.println("""
                         Please select your toppings:
@@ -263,7 +244,7 @@ public class UserInterface {
         System.out.println("Would you like to add some sauce? (yes/no)\n");
         String userInputSauce = scanner.nextLine();
         if (userInputSauce.equalsIgnoreCase("yes")) {
-            running = true;
+            boolean running = true;
             do {
                 System.out.println("""   
                         Select your sauce:
@@ -296,7 +277,7 @@ public class UserInterface {
         System.out.println("Would you like to add sides to your order? (yes/no)\n");
         String userInput = scanner.nextLine();
         if (userInput.equalsIgnoreCase("yes")) {
-            running = true;
+            boolean running = true;
             do {
                 System.out.println("""
                         Please select your side:
@@ -317,6 +298,8 @@ public class UserInterface {
                 }
             } while (running);
         } order.addItem(sandwich);
+        System.out.println("Sandwich has been added to your order!");
+        showOrderScreen();
     }
 
     private void addDrink() {
@@ -346,6 +329,8 @@ public class UserInterface {
                 running = false;
             }
         } while (running);
+        System.out.println("Drink has been added to your order!");
+        showOrderScreen();
     }
 
     private void addChips() {
@@ -377,6 +362,8 @@ public class UserInterface {
                 running = false;
             }
         } while (running);
+        System.out.println("Chips has been added to your order!");
+        showOrderScreen();
     }
 
     private void cancelOrder() {
