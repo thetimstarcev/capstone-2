@@ -21,6 +21,11 @@ public class Meat extends Ingredients {
     }
 
     @Override
+    public String getName() {
+        return meatType.toString();
+    }
+
+    @Override
     public double getPrice(Size size) {
         double price;
         switch (size) {

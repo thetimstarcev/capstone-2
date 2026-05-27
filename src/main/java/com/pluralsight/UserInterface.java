@@ -1,7 +1,5 @@
 package com.pluralsight;
-
 import com.pluralsight.enums.*;
-
 import java.time.LocalDateTime;
 import java.util.Scanner;
 

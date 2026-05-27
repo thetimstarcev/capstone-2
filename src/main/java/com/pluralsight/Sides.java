@@ -15,6 +15,11 @@ public class Sides extends Ingredients{
     }
 
     @Override
+    public String getName() {
+        return sideType.toString();
+    }
+
+    @Override
     public double getPrice (Size size) {
         return 0; // Regular sides are included at no extra cost
     }

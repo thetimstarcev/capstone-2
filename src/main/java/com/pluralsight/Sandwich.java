@@ -8,7 +8,7 @@ public class Sandwich extends MenuItem {
     private Size size;
     private BreadType type;
     private List<Meat> meats;
-    private List <Cheese> cheeses;
+    private List<Cheese> cheeses;
     private List<Ingredients> regularIngredients;
     private boolean toasted;
 
@@ -48,20 +48,20 @@ public class Sandwich extends MenuItem {
 
     //endregions
 
-    public void addMeat (Meat meat) {
+    public void addMeat(Meat meat) {
         meats.add(meat);
     }
 
-    public void addCheese (Cheese cheese) {
+    public void addCheese(Cheese cheese) {
         cheeses.add(cheese);
     }
 
-    public void addIngredients (Ingredients ingredient) {
+    public void addIngredients(Ingredients ingredient) {
         regularIngredients.add(ingredient);
     }
 
     @Override
-    public String getName () {
+    public String getName() {
         if (this.toasted) {
             return this.size + " " + this.type + " Sandwich " + " Toasted";
         } else return this.size + " " + this.type + " Sandwich ";
@@ -76,13 +76,13 @@ public class Sandwich extends MenuItem {
             case LARGE -> totalPrice = 8.50;
         }
         for (Meat meat : meats) {
-            totalPrice += meat.getPrice(size);
+            totalPrice += meat.getPrice(this.size);
         }
         for (Cheese cheese : cheeses) {
-            totalPrice += cheese.getPrice(size);
+            totalPrice += cheese.getPrice(this.size);
         }
         for (Ingredients ingredients : regularIngredients) {
-            totalPrice += ingredients.getPrice(size);
+            totalPrice += ingredients.getPrice(this.size);
         }
         return totalPrice;
     }

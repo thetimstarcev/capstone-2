@@ -14,6 +14,14 @@ public class Order {
         this.items = new ArrayList<>();
     }
 
+    public List<MenuItem> getItems() {
+        return items;
+    }
+
+    public LocalDateTime getOrderTime() {
+        return orderTime;
+    }
+
     public void addItem(MenuItem menuItem) {
         items.add(menuItem);
     }

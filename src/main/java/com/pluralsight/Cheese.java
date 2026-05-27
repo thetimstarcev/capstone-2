@@ -21,6 +21,11 @@ public class Cheese extends Ingredients {
     }
 
     @Override
+    public String getName() {
+        return cheeseType.toString();
+    }
+
+    @Override
     public double getPrice(Size size) {
         double price;
         switch (size) {

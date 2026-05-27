@@ -14,6 +14,11 @@ public class Toppings extends Ingredients {
     }
 
     @Override
+    public String getName() {
+        return toppingType.toString();
+    }
+
+    @Override
     public double getPrice(Size size) {
         return 0; // Regular toppings are included at no extra cost
     }

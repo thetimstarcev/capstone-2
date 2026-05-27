@@ -14,6 +14,11 @@ public class Sauces extends Ingredients{
     }
 
     @Override
+    public String getName() {
+        return saucesType.toString();
+    }
+
+    @Override
     public double getPrice (Size size) {
         return 0; // Regular sauces are included at no extra cost
     }
