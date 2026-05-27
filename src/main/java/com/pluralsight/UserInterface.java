@@ -1,8 +1,6 @@
 package com.pluralsight;
 import com.pluralsight.enums.*;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Scanner;
 
 public class UserInterface {
@@ -62,8 +60,14 @@ public class UserInterface {
                 case "1" -> addSandwich();
                 case "2" -> addDrink();
                 case "3" -> addChips();
-                case "4" -> checkout();
-                case "0" -> cancelOrder();
+                case "4" -> {
+                    checkout();
+                    running = false;
+                }
+                case "0" -> {
+                    cancelOrder();
+                    running = false;
+                }
                 default -> System.out.println("Invalid input. Please try again.");
             }
         } while (running);
@@ -84,7 +88,10 @@ public class UserInterface {
         do {
             String userInput = scanner.nextLine();
             switch (userInput) {
-                case "1" -> buildCustomSandwich();
+                case "1" -> {
+                    buildCustomSandwich();
+                    running = false;
+                }
                 case "2" -> {
                     addPhillyCheeseSteak();
                     System.out.println("Philly Cheese Steak added to your order!");
@@ -92,7 +99,7 @@ public class UserInterface {
                 }
                 case "3" -> {
                     addBLT();
-                    System.out.println("Philly Cheese Steak added to your order!");
+                    System.out.println("BLT Sandwich added to your order!");
                     running = false;
                 }
 
@@ -374,7 +381,6 @@ public class UserInterface {
     private void cancelOrder() {
         order = null;
         orderCounter--;
-        homeScreen();
     }
 
     private void checkout() {

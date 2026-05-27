@@ -62,9 +62,10 @@ public class Sandwich extends MenuItem {
 
     @Override
     public String getName() {
+        String name = this.size + " " + this.type + " Sandwich ";
         if (this.toasted) {
-            return this.size + " " + this.type + " Sandwich " + " Toasted";
-        } else return this.size + " " + this.type + " Sandwich ";
+            name += " Toasted";
+        } return name;
     }
 
     @Override
