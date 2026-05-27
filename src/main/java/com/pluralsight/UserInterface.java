@@ -65,6 +65,47 @@ public class UserInterface {
 
     private void addSandwich() {
         System.out.println("""
+                  What type of sandwich would you like?
+                =========================================
+                ①  Custom Sandwich                   (1)
+                ②  Philly Cheese Steak               (2)
+                ③  BLT Sandwich                      (3)
+                ⓪  Back to Main Menu                 (0)
+                =========================================
+                \n""");
+
+        boolean running = true;
+        do {
+            String userInput = scanner.nextLine();
+            switch (userInput) {
+                case "1" -> buildCustomSandwich();
+                case "2" -> {
+                    addPhillyCheeseSteak();
+                    System.out.println("Philly Cheese Steak added to your order!");
+                    running = false;
+                }
+                case "3" -> {
+                    addBLT();
+                    System.out.println("Philly Cheese Steak added to your order!");
+                    running = false;
+                }
+
+                case "0" -> running = false;
+                default -> System.out.println("Invalid input. Please try again.");
+            }
+        } while (running);
+    }
+
+    private void addPhillyCheeseSteak() {
+        order.addItem(new PhillyCheeseSteak());
+    }
+
+    private void addBLT() {
+        order.addItem(new BLT());
+    }
+
+    private void buildCustomSandwich() {
+        System.out.println("""
                          What size would you like your sandwich?
                         =========================================
                         ($5.50)   4"  - Small                 (1)
@@ -80,7 +121,6 @@ public class UserInterface {
             case "2" -> size = Size.MEDIUM;
             case "3" -> size = Size.LARGE;
             default -> System.out.println("Invalid input. Please try again.");
-
         }
 
         System.out.println("""
@@ -101,7 +141,6 @@ public class UserInterface {
             case "3" -> bread = BreadType.RYE;
             case "4" -> bread = BreadType.WRAP;
             default -> System.out.println("Invalid input. Please try again.");
-
         }
 
         System.out.println("Would you like your sandwich toasted? (yes/no)\n");
