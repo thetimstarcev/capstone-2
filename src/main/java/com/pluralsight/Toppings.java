@@ -9,10 +9,6 @@ public class Toppings extends Ingredients {
         this.toppingType = topping;
     }
 
-    public ToppingsType getTopping() {
-        return toppingType;
-    }
-
     @Override
     public String getName() {
         return toppingType.toString();

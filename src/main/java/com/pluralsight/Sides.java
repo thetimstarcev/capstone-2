@@ -10,10 +10,6 @@ public class Sides extends Ingredients{
         this.sideType = sideType;
     }
 
-    public SidesType getSideType() {
-        return sideType;
-    }
-
     @Override
     public String getName() {
         return sideType.toString();

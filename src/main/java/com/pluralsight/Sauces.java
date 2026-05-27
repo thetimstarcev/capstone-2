@@ -9,10 +9,6 @@ public class Sauces extends Ingredients{
         this.saucesType = saucesType;
     }
 
-    public SaucesType getSaucesType() {
-        return saucesType;
-    }
-
     @Override
     public String getName() {
         return saucesType.toString();
