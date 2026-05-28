@@ -21,7 +21,7 @@ public class Sandwich extends MenuItem {
         this.regularIngredients = new ArrayList<>();
     }
 
-    //regiongetters
+    // region getters
     public Size getSize() {
         return size;
     }
@@ -46,7 +46,7 @@ public class Sandwich extends MenuItem {
         return toasted;
     }
 
-    //endregions
+    // endregions
 
     public void addMeat(Meat meat) {
         meats.add(meat);
@@ -91,12 +91,3 @@ public class Sandwich extends MenuItem {
         return totalPrice;
     }
 }
-
-
-
-
-
-
-
-
-
