@@ -4,6 +4,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReceiptWriter {
@@ -22,7 +24,8 @@ public class ReceiptWriter {
                 -----------------------------------------
                 """;
 
-        List<MenuItem> orderedItems = order.getItems();
+        List<MenuItem> orderedItems = new ArrayList<>(order.getItems());
+        Collections.reverse(orderedItems);
         for (MenuItem item : orderedItems) {
             if (item instanceof Sandwich) {
                 Sandwich sandwich = (Sandwich) item;
