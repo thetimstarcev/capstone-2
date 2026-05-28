@@ -118,7 +118,9 @@ public class UserInterface {
     }
 
     private void buildCustomSandwich() {
-        System.out.println("""
+        Size size = null;
+        while (size == null) {
+            System.out.println("""
                  What size would you like your sandwich?
                 =========================================
                 ($5.50)   4"  - Small                 (1)
@@ -126,17 +128,18 @@ public class UserInterface {
                 ($8.50)   12" - Large                 (3)
                 =========================================
                 \n""");
-
-        String userInputSize = scanner.nextLine();
-        Size size = null;
-        switch (userInputSize) {
-            case "1" -> size = Size.SMALL;
-            case "2" -> size = Size.MEDIUM;
-            case "3" -> size = Size.LARGE;
-            default -> System.out.println("Invalid input. Please try again.");
+            String userInputSize = scanner.nextLine();
+            switch (userInputSize) {
+                case "1" -> size = Size.SMALL;
+                case "2" -> size = Size.MEDIUM;
+                case "3" -> size = Size.LARGE;
+                default -> System.out.println("Invalid input. Please try again.");
+            }
         }
 
-        System.out.println("""
+        BreadType bread = null;
+        while (bread == null) {
+            System.out.println("""
                     What type of bread you would like?
                 =========================================
                 🍞 White                              (1)
@@ -146,74 +149,82 @@ public class UserInterface {
                 =========================================
                 """);
 
-        String userInputBread = scanner.nextLine();
-        BreadType bread = null;
-        switch (userInputBread) {
-            case "1" -> bread = BreadType.WHITE;
-            case "2" -> bread = BreadType.WHEAT;
-            case "3" -> bread = BreadType.RYE;
-            case "4" -> bread = BreadType.WRAP;
-            default -> System.out.println("Invalid input. Please try again.");
+            String userInputBread = scanner.nextLine();
+            switch (userInputBread) {
+                case "1" -> bread = BreadType.WHITE;
+                case "2" -> bread = BreadType.WHEAT;
+                case "3" -> bread = BreadType.RYE;
+                case "4" -> bread = BreadType.WRAP;
+                default -> System.out.println("Invalid input. Please try again.");
+            }
         }
 
         System.out.println("Would you like your sandwich toasted? (yes/no)\n");
         String userInputToasted = scanner.nextLine();
         boolean toasted = userInputToasted.equalsIgnoreCase("yes");
-
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
-        System.out.println("Would you like to add meat to your sandwich? (yes/no)\n");
-        String userInputMeat = scanner.nextLine();
-        if (userInputMeat.equalsIgnoreCase("yes")) {
-            System.out.println("""
-                    Select your meat:
-                    1) Steak
-                    2) Ham
-                    3) Salami
-                    4) Roast Beef
-                    5) Chicken
-                    6) Bacon
-                    """);
-            String userSelection = scanner.nextLine();
-            MeatType meat = null;
-            switch (userSelection) {
-                case "1" -> meat = MeatType.STEAK;
-                case "2" -> meat = MeatType.HAM;
-                case "3" -> meat = MeatType.SALAMI;
-                case "4" -> meat = MeatType.ROAST_BEEF;
-                case "5" -> meat = MeatType.CHICKEN;
-                case "6" -> meat = MeatType.BACON;
-                default -> System.out.println("Invalid input. Please try again.");
+
+        MeatType meat = null;
+        while (meat == null) {
+            System.out.println("Would you like to add meat to your sandwich? (yes/no)\n");
+            String userInputMeat = scanner.nextLine();
+            if (userInputMeat.equalsIgnoreCase("yes")) {
+                System.out.println("""
+                        Select your meat:
+                        1) Steak
+                        2) Ham
+                        3) Salami
+                        4) Roast Beef
+                        5) Chicken
+                        6) Bacon
+                        """);
+                String userSelection = scanner.nextLine();
+                switch (userSelection) {
+                    case "1" -> meat = MeatType.STEAK;
+                    case "2" -> meat = MeatType.HAM;
+                    case "3" -> meat = MeatType.SALAMI;
+                    case "4" -> meat = MeatType.ROAST_BEEF;
+                    case "5" -> meat = MeatType.CHICKEN;
+                    case "6" -> meat = MeatType.BACON;
+                    default -> System.out.println("Invalid input. Please try again.");
+                }
             }
-            System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
-            String userAnswer = scanner.nextLine();
-            boolean extra = userAnswer.equalsIgnoreCase("yes");
-            sandwich.addMeat(new Meat(meat, extra));
+            if (meat != null) {
+                System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
+                String userAnswer = scanner.nextLine();
+                boolean extra = userAnswer.equalsIgnoreCase("yes");
+                sandwich.addMeat(new Meat(meat, extra));
+            }
         }
 
-        System.out.println("Would you like to add cheese to your sandwich? (yes/no)\n");
-        String userInputCheese = scanner.nextLine();
-        if (userInputCheese.equalsIgnoreCase("yes")) {
-            System.out.println("""
-                    Select your cheese:
-                    1) American
-                    2) Provolone
-                    3) Cheddar
-                    4) Swiss
-                    """);
-            String userSelection = scanner.nextLine();
-            CheeseType cheese = null;
-            switch (userSelection) {
-                case "1" -> cheese = CheeseType.AMERICAN;
-                case "2" -> cheese = CheeseType.PROVOLONE;
-                case "3" -> cheese = CheeseType.CHEDDAR;
-                case "4" -> cheese = CheeseType.SWISS;
-                default -> System.out.println("Invalid input. Please try again.");
+        CheeseType cheese = null;
+        while (cheese == null) {
+            System.out.println("Would you like to add cheese to your sandwich? (yes/no)\n");
+            String userInputCheese = scanner.nextLine();
+            if (userInputCheese.equalsIgnoreCase("yes")) {
+                System.out.println("""
+                        Select your cheese:
+                        1) American
+                        2) Provolone
+                        3) Cheddar
+                        4) Swiss
+                        """);
+                String userSelection = scanner.nextLine();
+                switch (userSelection) {
+                    case "1" -> cheese = CheeseType.AMERICAN;
+                    case "2" -> cheese = CheeseType.PROVOLONE;
+                    case "3" -> cheese = CheeseType.CHEDDAR;
+                    case "4" -> cheese = CheeseType.SWISS;
+                    default -> System.out.println("Invalid input. Please try again.");
+                }
             }
-            System.out.println("Would you like to add extra cheese to your sandwich? (yes/no)\n");
-            String userAnswer = scanner.nextLine();
-            boolean extra = userAnswer.equalsIgnoreCase("yes");
-            sandwich.addCheese(new Cheese(cheese, extra));
+            if (cheese != null) {
+                System.out.println("Would you like to add extra cheese to your sandwich? (yes/no)\n");
+                String userAnswer = scanner.nextLine();
+                boolean extra = userAnswer.equalsIgnoreCase("yes");
+                sandwich.addCheese(new Cheese(cheese, extra));
+            }
         }
 
         System.out.println("Would you like to add any other ingredients to your sandwich? (yes/no)\n");

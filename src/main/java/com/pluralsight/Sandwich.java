@@ -57,12 +57,15 @@ public class Sandwich extends MenuItem {
     }
 
     public void addIngredients(Ingredients ingredient) {
-        regularIngredients.add(ingredient);
+        boolean alreadyAdded = regularIngredients.stream().anyMatch(i -> i.getName().equalsIgnoreCase(ingredient.getName()));
+        if (alreadyAdded) {
+            System.out.println("Yo, what's up with the " + ingredient.getName() + "? Lettuce escort you out of our sandwich shop.");
+        } else regularIngredients.add(ingredient);
     }
 
     @Override
     public String getName() {
-        String name = this.size + " " + this.type + " Sandwich ";
+        String name = this.size + " " + this.type + " Sandwich";
         if (this.toasted) {
             name += " Toasted";
         } return name;

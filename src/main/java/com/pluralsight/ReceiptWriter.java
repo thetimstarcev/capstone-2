@@ -57,7 +57,6 @@ public class ReceiptWriter {
         return header + body + footer;
     }
 
-
     public void writeReceipt(Order order) {
         LocalDateTime time = order.getOrderTime();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
