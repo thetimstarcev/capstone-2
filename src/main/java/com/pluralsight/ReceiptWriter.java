@@ -40,21 +40,21 @@ public class ReceiptWriter {
                 for (Ingredients ingredients : sandwich.getRegularIngredients()) {
                     body += "-" + ingredients.getName() + "\n";
                 }
-                body += "Price: $" + sandwich.getPrice() + "\n\n";
+                body += String.format("Price: $%.2f%n%n", sandwich.getPrice());
             } else if (item instanceof Drink) {
                 Drink drink = (Drink) item;
                 body += drink.getName() + "\n";
-                body += "Price: $" + drink.getPrice() + "\n\n";
+                body += String.format("Price: $%.2f%n%n", drink.getPrice());
             } else if (item instanceof Chips) {
                 Chips chips = (Chips) item;
                 body += chips.getName() + "\n";
-                body += "Price: $" + chips.getPrice() + "\n\n";
+                body += String.format("Price: $%.2f%n%n", chips.getPrice());
             }
         }
 
-        String footer = """
-                -----------------------------------------
-                TOTAL: $""" + order.calculateTotal() +
+        String footer=
+                "-----------------------------------------\n" +
+                String.format("TOTAL: $%.2f", order.calculateTotal()) +
                 "\n-----------------------------------------\n" +
                 "   Thank you for choosing DELIcious!\n" +
                 "=========================================";
