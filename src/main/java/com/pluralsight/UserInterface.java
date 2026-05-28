@@ -343,7 +343,7 @@ public class UserInterface {
                 order.addItem(drink);
                 System.out.println("Drink added!");
                 String prompt = "Would you like to add another drink? (yes/no)\n";
-                if (getYesNoInput(prompt)) {
+                if (!getYesNoInput(prompt)) {
                     running = false;
                 }
             }
@@ -374,7 +374,7 @@ public class UserInterface {
                 order.addItem(chips);
                 System.out.println("Chips added!");
                 String prompt = "Would you like to add another bag of chips? (yes/no)\n";
-                if (getYesNoInput(prompt)) {
+                if (!getYesNoInput(prompt)) {
                     running = false;
                 }
             }
