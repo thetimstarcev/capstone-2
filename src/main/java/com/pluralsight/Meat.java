@@ -43,6 +43,7 @@ public class Meat extends Ingredients {
         }
         if (extraMeat) {
             price *= 1.5;
-        } return price;
+        }
+        return price;
     }
 }

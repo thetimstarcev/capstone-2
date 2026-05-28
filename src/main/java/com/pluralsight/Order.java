@@ -1,4 +1,5 @@
 package com.pluralsight;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,10 +31,11 @@ public class Order {
         items.add(menuItem);
     }
 
-    public double calculateTotal () {
+    public double calculateTotal() {
         double total = 0.00;
-        for(MenuItem item : items) {
+        for (MenuItem item : items) {
             total += item.getPrice();
-        } return total;
+        }
+        return total;
     }
 }

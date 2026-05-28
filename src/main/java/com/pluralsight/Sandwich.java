@@ -1,6 +1,8 @@
 package com.pluralsight;
+
 import com.pluralsight.enums.BreadType;
 import com.pluralsight.enums.Size;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -68,11 +70,12 @@ public class Sandwich extends MenuItem {
         String name = this.size + " " + this.type + " Sandwich";
         if (this.toasted) {
             name += " Toasted";
-        } return name;
+        }
+        return name;
     }
 
     @Override
-    public double getPrice () {
+    public double getPrice() {
         double totalPrice = 0.00;
         switch (this.size) {
             case SMALL -> totalPrice = 5.50;

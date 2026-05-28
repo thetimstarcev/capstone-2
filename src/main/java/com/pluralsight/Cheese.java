@@ -1,4 +1,5 @@
 package com.pluralsight;
+
 import com.pluralsight.enums.CheeseType;
 import com.pluralsight.enums.Size;
 
@@ -27,6 +28,7 @@ public class Cheese extends Ingredients {
         }
         if (extraCheese) {
             price *= 1.4;
-        } return price;
+        }
+        return price;
     }
 }

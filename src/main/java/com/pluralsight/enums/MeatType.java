@@ -1,5 +1,5 @@
 package com.pluralsight.enums;
 
 public enum MeatType {
-    STEAK, HAM, SALAMI, ROAST_BEEF, CHICKEN, BACON;
+    STEAK, HAM, SALAMI, ROAST_BEEF, CHICKEN, BACON
 }

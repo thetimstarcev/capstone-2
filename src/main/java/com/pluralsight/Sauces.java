@@ -1,8 +1,9 @@
 package com.pluralsight;
+
 import com.pluralsight.enums.SaucesType;
 import com.pluralsight.enums.Size;
 
-public class Sauces extends Ingredients{
+public class Sauces extends Ingredients {
     private SaucesType saucesType;
 
     public Sauces(SaucesType saucesType) {
@@ -15,7 +16,7 @@ public class Sauces extends Ingredients{
     }
 
     @Override
-    public double getPrice (Size size) {
+    public double getPrice(Size size) {
         return 0; // Regular sauces are included at no extra cost
     }
 }

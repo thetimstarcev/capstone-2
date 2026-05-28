@@ -1,5 +1,7 @@
 package com.pluralsight;
+
 import com.pluralsight.enums.*;
+
 import java.time.LocalDateTime;
 import java.util.Scanner;
 
@@ -121,13 +123,13 @@ public class UserInterface {
         Size size = null;
         while (size == null) {
             System.out.println("""
-                 What size would you like your sandwich?
-                =========================================
-                ($5.50)   4"  - Small                 (1)
-                ($7.00)   8"  - Medium                (2)
-                ($8.50)   12" - Large                 (3)
-                =========================================
-                \n""");
+                     What size would you like your sandwich?
+                    =========================================
+                    ($5.50)   4"  - Small                 (1)
+                    ($7.00)   8"  - Medium                (2)
+                    ($8.50)   12" - Large                 (3)
+                    =========================================
+                    \n""");
             String userInputSize = scanner.nextLine();
             switch (userInputSize) {
                 case "1" -> size = Size.SMALL;
@@ -140,14 +142,14 @@ public class UserInterface {
         BreadType bread = null;
         while (bread == null) {
             System.out.println("""
-                    What type of bread you would like?
-                =========================================
-                🍞 White                              (1)
-                🌾 Wheat                              (2)
-                🫓 Rye                                (3)
-                🌯 Wrap                               (4)
-                =========================================
-                """);
+                        What type of bread you would like?
+                    =========================================
+                    🍞 White                              (1)
+                    🌾 Wheat                              (2)
+                    🫓 Rye                                (3)
+                    🌯 Wrap                               (4)
+                    =========================================
+                    """);
 
             String userInputBread = scanner.nextLine();
             switch (userInputBread) {
@@ -159,18 +161,12 @@ public class UserInterface {
             }
         }
 
-        System.out.println("Would you like your sandwich toasted? (yes/no)\n");
-        String userInputToasted = scanner.nextLine();
-        boolean toasted = userInputToasted.equalsIgnoreCase("yes");
+        String prompt = "Would you like your sandwich toasted? (yes/no)\n";
+        boolean toasted = getYesNoInput(prompt);
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
-        boolean wantsMeat = false;
-        System.out.println("Would you like to add meat to your sandwich? (yes/no)\n");
-        String userInputMeat = scanner.nextLine();
-        if (userInputMeat.equalsIgnoreCase("yes")) {
-            wantsMeat = true;
-        }
-        if (wantsMeat) {
+        prompt = "Would you like to add meat to your sandwich? (yes/no)\n";
+        if (getYesNoInput(prompt)) {
             MeatType meat = null;
             while (meat == null) {
                 System.out.println("""
@@ -193,21 +189,15 @@ public class UserInterface {
                     default -> System.out.println("Invalid input. Please try again.");
                 }
                 if (meat != null) {
-                    System.out.println("Would you like to add extra meat to your sandwich? (yes/no)\n");
-                    String userAnswer = scanner.nextLine();
-                    boolean extra = userAnswer.equalsIgnoreCase("yes");
+                    prompt = "Would you like to add extra meat to your sandwich? (yes/no)\n";
+                    boolean extra = getYesNoInput(prompt);
                     sandwich.addMeat(new Meat(meat, extra));
                 }
             }
         }
 
-        boolean wantsCheese = false;
-        System.out.println("Would you like to add cheese to your sandwich? (yes/no)\n");
-        String userInputCheese = scanner.nextLine();
-        if (userInputCheese.equalsIgnoreCase("yes")) {
-            wantsCheese = true;
-        }
-        if (wantsCheese) {
+        prompt = "Would you like to add cheese to your sandwich? (yes/no)\n";
+        if (getYesNoInput(prompt)) {
             CheeseType cheese = null;
             while (cheese == null) {
                 System.out.println("""
@@ -226,17 +216,15 @@ public class UserInterface {
                     default -> System.out.println("Invalid input. Please try again.");
                 }
                 if (cheese != null) {
-                    System.out.println("Would you like to add extra cheese to your sandwich? (yes/no)\n");
-                    String userAnswer = scanner.nextLine();
-                    boolean extra = userAnswer.equalsIgnoreCase("yes");
+                    prompt = "Would you like to add extra cheese to your sandwich? (yes/no)\n";
+                    boolean extra = getYesNoInput(prompt);
                     sandwich.addCheese(new Cheese(cheese, extra));
                 }
             }
         }
 
-        System.out.println("Would you like to add any other ingredients to your sandwich? (yes/no)\n");
-        String userInputIngredients = scanner.nextLine();
-        if (userInputIngredients.equalsIgnoreCase("yes")) {
+        prompt = "Would you like to add any other ingredients to your sandwich? (yes/no)\n";
+        if (getYesNoInput(prompt)) {
             boolean running = true;
             do {
                 System.out.println("""
@@ -273,9 +261,9 @@ public class UserInterface {
             } while (running);
         }
 
-        System.out.println("Would you like to add some sauce? (yes/no)\n");
+        prompt = "Would you like to add some sauce? (yes/no)\n";
         String userInputSauce = scanner.nextLine();
-        if (userInputSauce.equalsIgnoreCase("yes")) {
+        if (getYesNoInput(prompt)) {
             boolean running = true;
             do {
                 System.out.println("""   
@@ -306,9 +294,8 @@ public class UserInterface {
             } while (running);
         }
 
-        System.out.println("Would you like to add sides to your order? (yes/no)\n");
-        String userInput = scanner.nextLine();
-        if (userInput.equalsIgnoreCase("yes")) {
+        prompt = "Would you like to add sides to your order? (yes/no)\n";
+        if (getYesNoInput(prompt)) {
             boolean running = true;
             do {
                 System.out.println("""
@@ -355,9 +342,8 @@ public class UserInterface {
                 Drink drink = new Drink(size);
                 order.addItem(drink);
                 System.out.println("Drink added!");
-                System.out.println("Would you like to add another drink? (yes/no)\n");
-                String userAnswer = scanner.nextLine();
-                if (userAnswer.equalsIgnoreCase("no")) {
+                String prompt = "Would you like to add another drink? (yes/no)\n";
+                if (getYesNoInput(prompt)) {
                     running = false;
                 }
             }
@@ -387,9 +373,8 @@ public class UserInterface {
                 Chips chips = new Chips(chipsSelection);
                 order.addItem(chips);
                 System.out.println("Chips added!");
-                System.out.println("Would you like to add another bag of chips? (yes/no)\n");
-                String userAnswer = scanner.nextLine();
-                if (userAnswer.equalsIgnoreCase("no")) {
+                String prompt = "Would you like to add another bag of chips? (yes/no)\n";
+                if (getYesNoInput(prompt)) {
                     running = false;
                 }
             }
@@ -422,5 +407,17 @@ public class UserInterface {
                 writer.writeReceipt(order);
             } else cancelOrder();
         }
+    }
+
+    private boolean getYesNoInput(String prompt) {
+        do {
+            System.out.println(prompt);
+            String userInput = scanner.nextLine();
+            if (userInput.equalsIgnoreCase("yes")) {
+                return true;
+            } else if (userInput.equalsIgnoreCase("no")) {
+                return false;
+            } else System.out.println("Invalid input. Please try again!\n");
+        } while (true);
     }
 }

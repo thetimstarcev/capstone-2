@@ -1,4 +1,5 @@
 package com.pluralsight;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class ReceiptWriter {
     public String getOrder(Order order) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd hh:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
         String header = """
                 =========================================
                          DELIcious Sandwich Shop
@@ -47,7 +48,7 @@ public class ReceiptWriter {
             } else if (item instanceof Chips) {
                 Chips chips = (Chips) item;
                 body += chips.getName() + "\n";
-                body += "Price: $" + chips.getPrice() +"\n\n";
+                body += "Price: $" + chips.getPrice() + "\n\n";
             }
         }
 
@@ -62,7 +63,7 @@ public class ReceiptWriter {
 
     public void writeReceipt(Order order) {
         LocalDateTime time = order.getOrderTime();
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-hhmmss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String fileName = time.format(formatter) + ".txt";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter("src/main/resources/receipts/" + fileName));
@@ -70,7 +71,8 @@ public class ReceiptWriter {
             writer.write(finalReceipt);
             writer.close();
         } catch (IOException e) {
-            System.out.println("Error getting your receipt");;
+            System.out.println("Error getting your receipt");
+            ;
         }
     }
 }
