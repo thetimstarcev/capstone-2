@@ -42,6 +42,7 @@ public class UserInterface {
             }
         } while (running);
     }
+
     /**
      * Displays the order screen where customers add items.
      * Creates a new Order with a unique number and current timestamp.

@@ -52,12 +52,12 @@ public class ReceiptWriter {
             }
         }
 
-        String footer=
+        String footer =
                 "-----------------------------------------\n" +
-                String.format("TOTAL: $%.2f", order.calculateTotal()) +
-                "\n-----------------------------------------\n" +
-                "   Thank you for choosing DELIcious!\n" +
-                "=========================================";
+                        String.format("TOTAL: $%.2f", order.calculateTotal()) +
+                        "\n-----------------------------------------\n" +
+                        "   Thank you for choosing DELIcious!\n" +
+                        "=========================================";
         return header + body + footer;
     }
 

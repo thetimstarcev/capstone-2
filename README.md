@@ -1,9 +1,10 @@
 #  🥪 DELIcious Sandwich Shop
 A command-line (CLI) point-of-sale application built in Java
-for DELI-cious, a custom sandwich shop. The app is designed
+for DELIcious, a custom sandwich shop. The app is designed
 for in-store order management, allowing customers to fully
 customize their sandwich orders, add drinks and chips, review
 their order, and receive a receipt.
+
 ---
 ## ✨ App Features
 ### Core Features
@@ -79,8 +80,8 @@ public void addIngredients(Ingredients ingredient) {
 }
 ```
 The `.anyMatch()` method with a lambda expression scans every existing topping and returns`true` if any name matches what the customer 
-is trying to add — preventing duplicates cleanly
-without needing a loop.
+is trying to add — preventing duplicates cleanly without needing a loop.
+
 ---
 ## 🚧 Challenges I Faced
 
@@ -89,6 +90,7 @@ One of the biggest challenges was managing user input validation without crashin
 while keeping the flow of the app smooth required careful use of loops and null checks throughout the program. For example, 
 when selecting sandwich size or bread type, the app had to keep prompting the user until a valid option was chosen rather than
 crashing or skipping ahead with a null value.
+
 ---
 ## 🚀 Future Improvements
 - **GUI Interface:** Replace the CLI with a graphical interface for a more modern experience
