@@ -7,7 +7,6 @@ import java.util.Scanner;
 
 public class UserInterface {
     private final Scanner scanner = new Scanner(System.in);
-    LocalDateTime orderTime;
     private Order order;
     private final ReceiptWriter writer = new ReceiptWriter();
     private int orderCounter = 1;
@@ -23,7 +22,7 @@ public class UserInterface {
                    Welcome to DELIcious Sandwich Shop!
                 =========================================
                 📃 New Order                          (1)
-                ❌ Exit                               (2)
+                ❌ Exit                               (0)
                 -----------------------------------------
                 Please choose an option:""";
 
@@ -48,7 +47,7 @@ public class UserInterface {
      * Creates a new Order with a unique number and current timestamp.
      */
     private void showOrderScreen() {
-        orderTime = LocalDateTime.now();
+        LocalDateTime orderTime = LocalDateTime.now();
         String orderNumber = "A" + orderCounter;
         orderCounter++;
         order = new Order(orderNumber, orderTime);
@@ -289,7 +288,6 @@ public class UserInterface {
 
         // Optional sauces (multiple allowed, no duplicates)
         prompt = "Would you like to add some sauce? (yes/no)\n";
-        String userInputSauce = scanner.nextLine();
         if (getYesNoInput(prompt)) {
             boolean running = true;
             do {
@@ -435,7 +433,6 @@ public class UserInterface {
     private void checkout() {
         if (order.calculateTotal() == 0.00) {
             System.out.println(Colors.RED + "Oops! Your order is empty. Returning to home screen..." + Colors.RESET);
-            System.out.println(order.getItems());
             cancelOrder();
         } else {
             System.out.println(writer.getOrder(order));

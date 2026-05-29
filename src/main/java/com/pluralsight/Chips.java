@@ -1,7 +1,7 @@
 package com.pluralsight;
 
 public class Chips extends MenuItem {
-    private String name;
+    private final String name;
 
     public Chips(String name) {
         this.name = name;

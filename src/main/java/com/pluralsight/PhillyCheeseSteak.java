@@ -12,6 +12,7 @@ public class PhillyCheeseSteak extends Sandwich {
         addIngredients(new Sauces(SaucesType.MAYO));
     }
 
+    @Override
     public String getName() {
         return "Philly Cheese Steak Signature Sandwich \n" + this.getSize() + " " + this.getType() + " Toasted";
     }

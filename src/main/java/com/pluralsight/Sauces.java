@@ -4,7 +4,7 @@ import com.pluralsight.enums.SaucesType;
 import com.pluralsight.enums.Size;
 
 public class Sauces extends Ingredients {
-    private SaucesType saucesType;
+    private final SaucesType saucesType;
 
     public Sauces(SaucesType saucesType) {
         this.saucesType = saucesType;

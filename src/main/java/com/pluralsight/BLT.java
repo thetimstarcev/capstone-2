@@ -12,6 +12,7 @@ public class BLT extends Sandwich {
         addIngredients(new Sauces(SaucesType.RANCH));
     }
 
+    @Override
     public String getName() {
         return "BLT Signature Sandwich \n" + this.getSize() + " " + this.getType() + " Toasted";
     }

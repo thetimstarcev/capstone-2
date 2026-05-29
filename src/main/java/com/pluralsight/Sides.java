@@ -4,7 +4,7 @@ import com.pluralsight.enums.SidesType;
 import com.pluralsight.enums.Size;
 
 public class Sides extends Ingredients {
-    private SidesType sideType;
+    private final SidesType sideType;
 
     public Sides(SidesType sideType) {
         this.sideType = sideType;
