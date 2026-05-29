@@ -6,18 +6,22 @@ import java.time.LocalDateTime;
 import java.util.Scanner;
 
 public class UserInterface {
-    private Scanner scanner = new Scanner(System.in);
+    private final Scanner scanner = new Scanner(System.in);
     LocalDateTime orderTime;
     private Order order;
-    private ReceiptWriter writer = new ReceiptWriter();
+    private final ReceiptWriter writer = new ReceiptWriter();
     private int orderCounter = 1;
 
     public void homeScreen() {
         String prompt = """
-                Welcome to DELIcious!
-                1) New Order
-                0) Exit
-                """;
+                
+                =========================================
+                   Welcome to DELIcious Sandwich Shop!
+                =========================================
+                📃 New Order                          (1)
+                ❌ Exit                               (2)
+                -----------------------------------------
+                Please choose an option:""";
 
         boolean running = true;
         do {
@@ -30,7 +34,7 @@ public class UserInterface {
                     running = false;
                     System.out.println("Have a great day and see you soon!");
                 }
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
         } while (running);
     }
@@ -45,14 +49,13 @@ public class UserInterface {
                 =========================================
                           Welcome to DELIcious!
                 =========================================
-                
                 🥪 Add Sandwich                       (1)
                 🥤 Add Drink                          (2)
                 🍟 Add Chips                          (3)
                 🧾 Checkout                           (4)
                 ❌ Cancel Order                       (0)
                 =========================================
-                """;
+                Please choose an option:""";
 
         boolean running = true;
         do {
@@ -70,7 +73,7 @@ public class UserInterface {
                     cancelOrder();
                     running = false;
                 }
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
         } while (running);
     }
@@ -84,7 +87,7 @@ public class UserInterface {
                 ③  BLT Sandwich                      (3)
                 ⓪  Back to Main Menu                 (0)
                 =========================================
-                \n""");
+                Please choose an option:""");
 
         boolean running = true;
         do {
@@ -96,17 +99,17 @@ public class UserInterface {
                 }
                 case "2" -> {
                     addPhillyCheeseSteak();
-                    System.out.println("Philly Cheese Steak added to your order!");
+                    System.out.println(Colors.GREEN + "Philly Cheese Steak added to your order!" + Colors.RESET);
                     running = false;
                 }
                 case "3" -> {
                     addBLT();
-                    System.out.println("BLT Sandwich added to your order!");
+                    System.out.println(Colors.GREEN + "BLT Sandwich added to your order!" + Colors.RESET);
                     running = false;
                 }
 
                 case "0" -> running = false;
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
         } while (running);
     }
@@ -129,13 +132,13 @@ public class UserInterface {
                     ($7.00)   8"  - Medium                (2)
                     ($8.50)   12" - Large                 (3)
                     =========================================
-                    \n""");
+                    Please choose an option:""");
             String userInputSize = scanner.nextLine();
             switch (userInputSize) {
                 case "1" -> size = Size.SMALL;
                 case "2" -> size = Size.MEDIUM;
                 case "3" -> size = Size.LARGE;
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
         }
 
@@ -149,7 +152,7 @@ public class UserInterface {
                     🫓 Rye                                (3)
                     🌯 Wrap                               (4)
                     =========================================
-                    """);
+                    Please choose an option:""");
 
             String userInputBread = scanner.nextLine();
             switch (userInputBread) {
@@ -157,7 +160,7 @@ public class UserInterface {
                 case "2" -> bread = BreadType.WHEAT;
                 case "3" -> bread = BreadType.RYE;
                 case "4" -> bread = BreadType.WRAP;
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
         }
 
@@ -170,14 +173,17 @@ public class UserInterface {
             MeatType meat = null;
             while (meat == null) {
                 System.out.println("""
-                        Select your meat:
-                        1) Steak
-                        2) Ham
-                        3) Salami
-                        4) Roast Beef
-                        5) Chicken
-                        6) Bacon
-                        """);
+                        -----------------------------------------
+                                    Select your meat:
+                        -----------------------------------------
+                        Steak                                 (1)
+                        Ham                                   (2)
+                        Salami                                (3)
+                        Roast Beef                            (4)
+                        Chicken                               (5)
+                        Bacon                                 (6)
+                        -----------------------------------------
+                        Please choose an option:""");
                 String userSelection = scanner.nextLine();
                 switch (userSelection) {
                     case "1" -> meat = MeatType.STEAK;
@@ -186,7 +192,7 @@ public class UserInterface {
                     case "4" -> meat = MeatType.ROAST_BEEF;
                     case "5" -> meat = MeatType.CHICKEN;
                     case "6" -> meat = MeatType.BACON;
-                    default -> System.out.println("Invalid input. Please try again.");
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
                 if (meat != null) {
                     prompt = "Would you like to add extra meat to your sandwich? (yes/no)\n";
@@ -201,19 +207,22 @@ public class UserInterface {
             CheeseType cheese = null;
             while (cheese == null) {
                 System.out.println("""
-                        Select your cheese:
-                        1) American
-                        2) Provolone
-                        3) Cheddar
-                        4) Swiss
-                        """);
+                        -----------------------------------------
+                                   Select your cheese:
+                        -----------------------------------------
+                        American                              (1)
+                        Provolone                             (2)
+                        Cheddar                               (3)
+                        Swiss                                 (4)
+                        -----------------------------------------
+                        Please choose an option:""");
                 String userSelection = scanner.nextLine();
                 switch (userSelection) {
                     case "1" -> cheese = CheeseType.AMERICAN;
                     case "2" -> cheese = CheeseType.PROVOLONE;
                     case "3" -> cheese = CheeseType.CHEDDAR;
                     case "4" -> cheese = CheeseType.SWISS;
-                    default -> System.out.println("Invalid input. Please try again.");
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
                 if (cheese != null) {
                     prompt = "Would you like to add extra cheese to your sandwich? (yes/no)\n";
@@ -228,18 +237,21 @@ public class UserInterface {
             boolean running = true;
             do {
                 System.out.println("""
-                        Please select your toppings:
-                        1) Lettuce
-                        2) Peppers
-                        3) Onions
-                        4) Tomatoes
-                        5) Jalapeños
-                        6) Cucumbers
-                        7) Pickles
-                        8) Guacamole
-                        9) Mushrooms
-                        0) Done adding ingredients
-                        """);
+                        -----------------------------------------
+                                Please select your toppings:
+                        -----------------------------------------
+                        Lettuce                               (1)
+                        Peppers                               (2)
+                        Onions                                (3)
+                        Tomatoes                              (4)
+                        Jalapeños                             (5)
+                        Cucumbers                             (6)
+                        Pickles                               (7)
+                        Guacamole                             (8)
+                        Mushrooms                             (9)
+                        Done adding ingredients               (0)
+                        -----------------------------------------
+                        Please choose an option:""");
                 String userSelection = scanner.nextLine();
                 ToppingsType topping = null;
                 switch (userSelection) {
@@ -253,7 +265,7 @@ public class UserInterface {
                     case "8" -> topping = ToppingsType.GUACAMOLE;
                     case "9" -> topping = ToppingsType.MUSHROOMS;
                     case "0" -> running = false;
-                    default -> System.out.println("Invalid input. Please try again.");
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
                 if (topping != null) {
                     sandwich.addIngredients(new Toppings(topping));
@@ -266,16 +278,19 @@ public class UserInterface {
         if (getYesNoInput(prompt)) {
             boolean running = true;
             do {
-                System.out.println("""   
-                        Select your sauce:
-                        1) Mayo
-                        2) Mustard
-                        3) Ketchup
-                        4) Ranch
-                        5) Thousand Islands
-                        6) Vinaigrette
-                        0) Done adding sauces
-                        """);
+                System.out.println("""
+                        -----------------------------------------
+                                   Select your sauce:
+                        -----------------------------------------
+                        Mayo                                  (1)
+                        Mustard                               (2)
+                        Ketchup                               (3)
+                        Ranch                                 (4)
+                        Thousand Islands                      (5)
+                        Vinaigrette                           (6)
+                        Done adding sauces                    (0)
+                        -----------------------------------------
+                        Please choose an option:""");
                 String userSelection = scanner.nextLine();
                 SaucesType sauce = null;
                 switch (userSelection) {
@@ -286,7 +301,7 @@ public class UserInterface {
                     case "5" -> sauce = SaucesType.THOUSAND_ISLANDS;
                     case "6" -> sauce = SaucesType.VINAIGRETTE;
                     case "0" -> running = false;
-                    default -> System.out.println("Invalid input. Please try again.");
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
                 if (sauce != null) {
                     sandwich.addIngredients(new Sauces(sauce));
@@ -299,18 +314,21 @@ public class UserInterface {
             boolean running = true;
             do {
                 System.out.println("""
-                        Please select your side:
-                        1) Au jus
-                        2) Sauce
-                        0) Done adding sides
-                        """);
+                        -----------------------------------------
+                                 Please select your side:
+                        -----------------------------------------
+                        Au jus                                (1)
+                        Sauce                                 (2)
+                        Done adding sides                     (0)
+                        -----------------------------------------
+                        Please choose an option:""");
                 String userSelection = scanner.nextLine();
                 SidesType side = null;
                 switch (userSelection) {
                     case "1" -> side = SidesType.AU_JUS;
                     case "2" -> side = SidesType.SAUCE;
                     case "0" -> running = false;
-                    default -> System.out.println("Invalid input. Please try again.");
+                    default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
                 }
                 if (side != null) {
                     sandwich.addIngredients(new Sides(side));
@@ -318,30 +336,33 @@ public class UserInterface {
             } while (running);
         }
         order.addItem(sandwich);
-        System.out.println("Sandwich has been added to your order!");
+        System.out.println(Colors.GREEN + "Sandwich has been added to your order!" + Colors.RESET);
     }
 
     private void addDrink() {
         boolean running = true;
         do {
             System.out.println("""
-                    Please select your drink size:
-                    1) Small
-                    2) Medium
-                    3) Large
-                    """);
+                    -----------------------------------------
+                          Please select your drink size:
+                    -----------------------------------------
+                    Small                                 (1)
+                    Medium                                (2)
+                    Large                                 (3)
+                    -----------------------------------------
+                    Please choose an option:""");
             String userSelection = scanner.nextLine();
             Size size = null;
             switch (userSelection) {
                 case "1" -> size = Size.SMALL;
                 case "2" -> size = Size.MEDIUM;
                 case "3" -> size = Size.LARGE;
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
             if (size != null) {
                 Drink drink = new Drink(size);
                 order.addItem(drink);
-                System.out.println("Drink added!");
+                System.out.println(Colors.GREEN + "Drink added!" + Colors.RESET);
                 String prompt = "Would you like to add another drink? (yes/no)\n";
                 if (!getYesNoInput(prompt)) {
                     running = false;
@@ -354,12 +375,15 @@ public class UserInterface {
         boolean running = true;
         do {
             System.out.println("""
-                    Please select your chips:
-                    1) Doritos
-                    2) Lays
-                    3) Cheetos
-                    4) Pringles
-                    """);
+                    -----------------------------------------
+                            Please select your chips:
+                    -----------------------------------------
+                    Doritos                               (1)
+                    Lays                                  (2)
+                    Cheetos                               (3)
+                    Pringles                              (4)
+                    -----------------------------------------
+                    Please choose an option:""");
             String userSelection = scanner.nextLine();
             String chipsSelection = null;
             switch (userSelection) {
@@ -367,12 +391,12 @@ public class UserInterface {
                 case "2" -> chipsSelection = "Lays";
                 case "3" -> chipsSelection = "Cheetos";
                 case "4" -> chipsSelection = "Pringles";
-                default -> System.out.println("Invalid input. Please try again.");
+                default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
             if (chipsSelection != null) {
                 Chips chips = new Chips(chipsSelection);
                 order.addItem(chips);
-                System.out.println("Chips added!");
+                System.out.println(Colors.GREEN + "Chips added!" + Colors.RESET);
                 String prompt = "Would you like to add another bag of chips? (yes/no)\n";
                 if (!getYesNoInput(prompt)) {
                     running = false;
@@ -388,7 +412,7 @@ public class UserInterface {
 
     private void checkout() {
         if (order.calculateTotal() == 0.00) {
-            System.out.println("Oops! Your order is empty. Returning to home screen...");
+            System.out.println(Colors.RED + "Oops! Your order is empty. Returning to home screen..." + Colors.RESET);
             System.out.println(order.getItems());
             cancelOrder();
         } else {
@@ -400,10 +424,10 @@ public class UserInterface {
                     ✅ Confirm                            (1)
                     ❌ Cancel                             (2)
                     -----------------------------------------
-                    """);
+                    Please choose an option:""");
             String userInput = scanner.nextLine();
             if (userInput.equalsIgnoreCase("1")) {
-                System.out.println("Your order has been confirmed! Thank you for choosing DELIcious!");
+                System.out.println(Colors.GREEN + "Your order has been confirmed! Thank you for choosing DELIcious!" + Colors.RESET);
                 writer.writeReceipt(order);
             } else cancelOrder();
         }
@@ -417,7 +441,7 @@ public class UserInterface {
                 return true;
             } else if (userInput.equalsIgnoreCase("no")) {
                 return false;
-            } else System.out.println("Invalid input. Please try again!\n");
+            } else System.out.println(Colors.RED + "Invalid input. Please try again!\n" + Colors.RESET);
         } while (true);
     }
 }
