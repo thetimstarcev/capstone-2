@@ -57,10 +57,11 @@ src/
 ```
 ---
 ## 📐 Class Diagram
-### Original
+### Initial Design
+![Initial Class Diagram](images/InitialDesign.svg)
 
-### Latest
-
+### Final Design
+![Initial Class Diagram](images/Final.svg)
 ---
 ## 💡 Code Highlight
 One of my favorite pieces of code is the **duplicate topping
@@ -96,9 +97,6 @@ crashing or skipping ahead with a null value.
 - **Order History:** Let customers quickly reorder their favorite previous meals
 - **Calorie Tracking:** Display calorie information for each topping and sandwich
 - **Multiple Language Support:** Make the app accessible to non-English speaking customers
----
-## 📸 Screenshots
-
 ---
 ## 👤 Author
 **Tim Startsev**, Year Up United — Spring 2026
