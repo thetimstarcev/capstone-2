@@ -25,6 +25,13 @@ public class Meat extends Ingredients {
         return meatType.toString();
     }
 
+    /**
+     * Calculates the price of this meat based on sandwich size.
+     * If extraMeat is true, an additional charge is added on top of the base price.
+     *
+     * @param size the size of the sandwich
+     * @return the total meat price as a double
+     */
     @Override
     public double getPrice(Size size) {
         double price;

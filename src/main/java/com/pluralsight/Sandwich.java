@@ -74,20 +74,30 @@ public class Sandwich extends MenuItem {
         return name;
     }
 
+    /**
+     * Calculates the total price of this sandwich.
+     * Price = base bread price + meat price(s) + cheese price(s)
+     * Regular ingredients (toppings, sauces, sides) are always free.
+     *
+     * @return the total sandwich price as a double
+     */
     @Override
     public double getPrice() {
+        // Start with base bread price based on size
         double totalPrice = 0.00;
         switch (this.size) {
             case SMALL -> totalPrice = 5.50;
             case MEDIUM -> totalPrice = 7.00;
             case LARGE -> totalPrice = 8.50;
         }
+        // Add premium topping costs
         for (Meat meat : meats) {
             totalPrice += meat.getPrice(this.size);
         }
         for (Cheese cheese : cheeses) {
             totalPrice += cheese.getPrice(this.size);
         }
+        // Regular ingredients are free but looped in case pricing changes later
         for (Ingredients ingredients : regularIngredients) {
             totalPrice += ingredients.getPrice(this.size);
         }

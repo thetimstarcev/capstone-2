@@ -17,6 +17,13 @@ public class Cheese extends Ingredients {
         return cheeseType.toString();
     }
 
+    /**
+     * Calculates the price of this cheese based on sandwich size.
+     * If extraCheese is true, an additional charge is added on top of the base price.
+     *
+     * @param size the size of the sandwich
+     * @return the total cheese price as a double
+     */
     @Override
     public double getPrice(Size size) {
         double price = 0;

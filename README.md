@@ -32,7 +32,29 @@ git clone https://github.com/thetimstarcev/capstone-2.git
 4. Run the `App.java` file
 ---
 ## 📁 Project Structure
-
+```plaintext
+src/
+├── main/
+│   ├── java/
+│   │   └── com/pluralsight/
+│   │       ├── enums/
+│   │       │   ├── BreadType
+│   │       │   ├── CheeseType
+│   │       │   ├── MeatType
+│   │       │   ├── SaucesType
+│   │       │   ├── SidesType
+│   │       │   ├── Size
+│   │       │   └── ToppingsType
+│   │       ├── App
+│   │       ├── Cheese
+│   │       ├── Chips
+│   │       ├── Colors
+│   │       ├── Drink
+│   │       └── ...
+│   └── resources/
+│       └── receipts/
+└── test/
+```
 ---
 ## 📐 Class Diagram
 ### Original

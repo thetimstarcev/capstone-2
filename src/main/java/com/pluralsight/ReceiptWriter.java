@@ -61,8 +61,16 @@ public class ReceiptWriter {
         return header + body + footer;
     }
 
+    /**
+     * Writes the completed order receipt to a .txt file.
+     * Uses getOrderPlain() to avoid color codes appearing in the file.
+     * Uses try-with-resources to ensure the writer is always closed properly.
+     *
+     * @param order the completed Order to save
+     */
     public void writeReceipt(Order order) {
         LocalDateTime time = order.getOrderTime();
+        // HH = 24-hour format to prevent two receipts sharing the same filename
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd-HHmmss");
         String fileName = time.format(formatter) + ".txt";
         try {

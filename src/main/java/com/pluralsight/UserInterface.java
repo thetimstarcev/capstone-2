@@ -12,6 +12,10 @@ public class UserInterface {
     private final ReceiptWriter writer = new ReceiptWriter();
     private int orderCounter = 1;
 
+    /**
+     * Displays the home screen and keeps the app running
+     * until the user chooses to exit.
+     */
     public void homeScreen() {
         String prompt = """
                 
@@ -38,7 +42,10 @@ public class UserInterface {
             }
         } while (running);
     }
-
+    /**
+     * Displays the order screen where customers add items.
+     * Creates a new Order with a unique number and current timestamp.
+     */
     private void showOrderScreen() {
         orderTime = LocalDateTime.now();
         String orderNumber = "A" + orderCounter;
@@ -78,6 +85,7 @@ public class UserInterface {
         } while (running);
     }
 
+    // Displays sandwich type selection — custom or signature
     private void addSandwich() {
         System.out.println("""
                   What type of sandwich would you like?
@@ -123,6 +131,7 @@ public class UserInterface {
     }
 
     private void buildCustomSandwich() {
+        // Loop until valid size selection
         Size size = null;
         while (size == null) {
             System.out.println("""
@@ -142,6 +151,7 @@ public class UserInterface {
             }
         }
 
+        // Loop until valid bread selection
         BreadType bread = null;
         while (bread == null) {
             System.out.println("""
@@ -163,11 +173,12 @@ public class UserInterface {
                 default -> System.out.println(Colors.RED + "Invalid input. Please try again." + Colors.RESET);
             }
         }
-
+        // Toasted preference
         String prompt = "Would you like your sandwich toasted? (yes/no)\n";
         boolean toasted = getYesNoInput(prompt);
         Sandwich sandwich = new Sandwich(size, bread, toasted);
 
+        // Meat preference
         prompt = "Would you like to add meat to your sandwich? (yes/no)\n";
         if (getYesNoInput(prompt)) {
             MeatType meat = null;
@@ -202,6 +213,7 @@ public class UserInterface {
             }
         }
 
+        // Cheese preference
         prompt = "Would you like to add cheese to your sandwich? (yes/no)\n";
         if (getYesNoInput(prompt)) {
             CheeseType cheese = null;
@@ -232,6 +244,7 @@ public class UserInterface {
             }
         }
 
+        // Optional ingredients (multiple allowed, no duplicates)
         prompt = "Would you like to add any other ingredients to your sandwich? (yes/no)\n";
         if (getYesNoInput(prompt)) {
             boolean running = true;
@@ -273,6 +286,7 @@ public class UserInterface {
             } while (running);
         }
 
+        // Optional sauces (multiple allowed, no duplicates)
         prompt = "Would you like to add some sauce? (yes/no)\n";
         String userInputSauce = scanner.nextLine();
         if (getYesNoInput(prompt)) {
@@ -309,6 +323,7 @@ public class UserInterface {
             } while (running);
         }
 
+        // Optional sides (multiple allowed, no duplicates)
         prompt = "Would you like to add sides to your order? (yes/no)\n";
         if (getYesNoInput(prompt)) {
             boolean running = true;
@@ -339,6 +354,7 @@ public class UserInterface {
         System.out.println(Colors.GREEN + "Sandwich has been added to your order!" + Colors.RESET);
     }
 
+    // Prompts customer to select a drink size, loops to allow multiple drinks
     private void addDrink() {
         boolean running = true;
         do {
@@ -371,6 +387,7 @@ public class UserInterface {
         } while (running);
     }
 
+    // Prompts customer to select a chip type, loops to allow multiple bags
     private void addChips() {
         boolean running = true;
         do {
@@ -410,6 +427,10 @@ public class UserInterface {
         orderCounter--;
     }
 
+    /**
+     * Displays the full order summary and prompts customer to confirm or cancel.
+     * If order is empty, cancels and returns to home screen.
+     */
     private void checkout() {
         if (order.calculateTotal() == 0.00) {
             System.out.println(Colors.RED + "Oops! Your order is empty. Returning to home screen..." + Colors.RESET);
@@ -433,6 +454,13 @@ public class UserInterface {
         }
     }
 
+    /**
+     * Reusable helper method for yes/no questions throughout the app.
+     * Loops until the user enters a valid "yes" or "no" response.
+     *
+     * @param prompt the question to display to the user
+     * @return true if user enters "yes", false if user enters "no"
+     */
     private boolean getYesNoInput(String prompt) {
         do {
             System.out.println(prompt);

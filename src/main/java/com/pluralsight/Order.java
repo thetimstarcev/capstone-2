@@ -31,6 +31,11 @@ public class Order {
         items.add(menuItem);
     }
 
+    /**
+     * Calculates the total cost of all items in this order.
+     *
+     * @return the total order price as a double
+     */
     public double calculateTotal() {
         double total = 0.00;
         for (MenuItem item : items) {
